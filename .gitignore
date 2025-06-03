@@ -6,6 +6,7 @@
 *.seq
 *.csv
 *.png
+__pycache__
 
 # Ignore all files in the data directory
 frames_output/*
