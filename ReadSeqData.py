@@ -3,7 +3,8 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-seq_file = "625_38n18_1_2mm_-161_07_41_19_806.seq"
+# seq_file = "625_38n18_1_2mm_-161_07_41_19_806.seq"
+seq_file = "./seq_spoiny/600_41n20_1_2mm_-161_08_03_50_784.seq"
 output_folder = "./frames_output"
 
 splitter = Splitter(
@@ -16,9 +17,3 @@ splitter = Splitter(
 splitter.process([seq_file])
 
 print(f"Klatki zapisane w folderze: {output_folder}")
-
-
-
-
-
-

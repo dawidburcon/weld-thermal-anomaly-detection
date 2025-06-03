@@ -5,7 +5,8 @@ import os
 from glob import iglob
 import csv
 
-seq_file_name = '625_38n18_1_2mm_-161_07_41_19_806'
+# seq_file_name = '625_38n18_1_2mm_-161_07_41_19_806'
+seq_file_name = '600_41n20_1_2mm_-161_08_03_50_784'
 
 # Pobranie listy TIFF
 tiff_frames = sorted(list(iglob(f"./frames_output/{seq_file_name}/radiometric/*.tiff")))

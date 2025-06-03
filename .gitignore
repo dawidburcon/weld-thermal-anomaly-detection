@@ -8,9 +8,7 @@
 *.png
 
 # Ignore all files in the data directory
-frames_output/625_38n18_1_2mm_-161_07_41_19_806/raw/*
-frames_output/625_38n18_1_2mm_-161_07_41_19_806/radiometric/*
-frames_output/625_38n18_1_2mm_-161_07_41_19_806/video/*
-frames_output/625_38n18_1_2mm_-161_07_41_19_806/preview/*
-frames_output/625_38n18_1_2mm_-161_07_41_19_806/preview_fixed/*
+frames_output/*
+seq_spoiny/*
+*.pth
 
