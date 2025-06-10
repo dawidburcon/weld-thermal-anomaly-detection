@@ -16,14 +16,32 @@
 # ---
 
 # %%
+h# -*- coding: utf-8 -*-
+# ---
+# jupyter:
+#   jupytext:
+#     cell_metadata_filter: -all
+#     custom_cell_magics: kql
+#     text_representation:
+#       extension: .py
+#       format_name: percent
+#       format_version: '1.3'
+#       jupytext_version: 1.11.2
+#   kernelspec:
+#     display_name: thermal_3.10
+#     language: python
+#     name: python3
+# ---
+
+# %%
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 # %%
 # Ścieżka do pliku
-# seq_file_name = '625_38n18_1_2mm_-161_07_41_19_806'
-seq_file_name = '600_41n20_1_2mm_-161_08_03_50_784'
+seq_file_name = '600_56n17_1mm_-161_09_29_59_808'
+# seq_file_name = '600_41n20_1_2mm_-161_08_03_50_784'
 csv_path = f'./frames_output/{seq_file_name}/temperature_stats.csv'
 
 # %%
@@ -749,6 +767,7 @@ from torch.utils.data import Dataset, DataLoader
 
 # --- KONFIGURACJA ---
 IMAGE_DIR = f'frames_output/{seq_file_name}/preview_fixed'
+# IMAGE_DIR = f'frames_output/{seq_file_name}/no_ignition'
 IMAGE_SIZE = (64, 64)
 BATCH_SIZE = 16
 EPOCHS = 50
@@ -896,6 +915,17 @@ print("\nAnomalie spoiny:")
 for i in anomalies_weld:
     print(f"{filenames[i]} - error = {errors_weld[i]:.4f}")
 
+
+
+
+# %%
+plt.subplot(1,2,1)
+plt.imshow(original_image.squeeze().cpu(), cmap='gray')
+plt.title("Oryginał")
+plt.subplot(1,2,2)
+plt.imshow(reconstructed_image.squeeze().cpu(), cmap='gray')
+plt.title("Rekonstrukcja")
+plt.show()
 
 # %%
 torch.save(model_arc.state_dict(), "autoencoder_arc_reference.pth")
