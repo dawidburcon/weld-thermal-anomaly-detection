@@ -12,4 +12,7 @@ __pycache__
 frames_output/*
 seq_spoiny/*
 *.pth
+*.txt
+!requierements.txt
+*.pkl
 
