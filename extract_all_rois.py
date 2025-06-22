@@ -4,16 +4,17 @@ from tqdm import tqdm
 
 # --- KONFIGURACJA ---
 SEQUENCES_DIR = "frames_output"
-# OUTPUT_ARC = "output_rois/train_roi_arc"
-# OUTPUT_WELD = "output_rois/train_roi_weld"
-# LOG_PATH = "roi_extraction_log.txt"
-OUTPUT_ARC = "output_rois/test_roi_arc"
-OUTPUT_WELD = "output_rois/test_roi_weld"
-LOG_PATH = "test_roi_extraction_log.txt"
+OUTPUT_ARC = "output_rois/train_roi_arc"
+OUTPUT_WELD = "output_rois/train_roi_weld"
+LOG_PATH = "roi_extraction_log.txt"
+# OUTPUT_ARC = "output_rois/test_roi_arc"
+# OUTPUT_WELD = "output_rois/test_roi_weld"
+# LOG_PATH = "test_roi_extraction_log.txt"
 
 # Lista sekwencji do przetworzenia (foldery z frames_output)
 SELECTED_SEQUENCES = [
-    '625_38n18_1_2mm_-161_07_41_19_806'
+    '600_55n16_1mm_-161_09_26_34_465',
+    '600_54n15_1mm_-161_09_19_15_122',
 ]
 
 # Współrzędne ROI — możesz zmienić
