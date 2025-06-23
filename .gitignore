@@ -16,3 +16,5 @@ seq_spoiny/*
 !requierements.txt
 *.pkl
 
+*.log
+
