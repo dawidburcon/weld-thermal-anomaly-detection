@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="Sn4HLtTOisqBsUecTmez" name="Page-1">
-        <mxGraphModel dx="1260" dy="907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1048" dy="1515" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -58,6 +58,9 @@
                 <mxCell id="21" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="18" target="20">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
+                <mxCell id="38" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="18" target="37">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="18" value="Analiza klatki&lt;br&gt;(filtry, temperatury)&amp;nbsp;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="500" y="920" width="120" height="60" as="geometry"/>
                 </mxCell>
@@ -96,8 +99,25 @@
                 <mxCell id="24" value="TAK" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="240" y="835" width="60" height="30" as="geometry"/>
                 </mxCell>
+                <mxCell id="39" style="edgeStyle=none;html=1;" edge="1" parent="1" source="26">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="390" y="400" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="110" y="1080"/>
+                            <mxPoint x="110" y="400"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
                 <mxCell id="26" value="Log -&amp;gt; OK" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="150" y="1060" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" style="edgeStyle=none;html=1;" edge="1" parent="1" source="28">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="110" y="1070" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="110" y="1180"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="28" value="LOG -&amp;gt; ANOMALIA" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="660" y="1160" width="120" height="40" as="geometry"/>
@@ -112,7 +132,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="34" value="NIE" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-                    <mxGeometry x="380" y="1065" width="60" height="30" as="geometry"/>
+                    <mxGeometry x="360" y="1065" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="20" target="36">
                     <mxGeometry relative="1" as="geometry">
@@ -123,6 +143,9 @@
                 </mxCell>
                 <mxCell id="36" value="TAK" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="640" y="1065" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="LOG -&amp;gt;&lt;div&gt;Typ anomalii&lt;/div&gt;&lt;div&gt;parametry&amp;nbsp;&lt;/div&gt;&lt;div&gt;anomalii itd&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="660" y="910" width="95" height="80" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
