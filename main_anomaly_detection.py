@@ -23,10 +23,20 @@ class AnomalyDetector:
             transforms.Resize((64, 64)),
             transforms.ToTensor()
         ])
+        open(os.path.join(self.config['log_dir'], "system.log"), 'w').close()
+
 
     def _setup_paths(self):
         for subdir in ["preview", "processed", "csv"]:
-            os.makedirs(os.path.join(self.config['log_dir'], subdir), exist_ok=True)
+            path = os.path.join(self.config['log_dir'], subdir)
+            os.makedirs(path, exist_ok=True)
+
+            # Usuń zawartość folderów preview i processed
+            if subdir in ["preview", "processed"]:
+                for file in os.listdir(path):
+                    file_path = os.path.join(path, file)
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
 
     def _setup_logger(self):
         log_file = os.path.join(self.config['log_dir'], "system.log")
@@ -74,7 +84,7 @@ class AnomalyDetector:
         elif is_geom_bad:
             return "GEOM_WADA", roi_edges, num_geom, area_geom, num_temp, ratio_tmp
         else:
-            return "POTWIERDZONA_AE", roi_edges, num_geom, area_geom, num_temp, ratio_tmp
+            return "BRAK_POTWIERDZENIA", roi_edges, num_geom, area_geom, num_temp, ratio_tmp
 
     def run(self):
         for fname in sorted(os.listdir(self.config['image_dir'])):
@@ -128,8 +138,7 @@ class AnomalyDetector:
                         is_anomaly = is_anom == "True"
                         typ = typ if typ else "OK"
                         final_type = typ
-                        if is_anomaly and typ == "OK":
-                            final_type = "FALSE_POSITIVE"
+            
                         data.append({
                             "frame": frame,
                             "recon_error": float(diff),
@@ -145,12 +154,13 @@ class AnomalyDetector:
 
             # === STATYSTYKI ===
             total = len(df)
-            false_positives = (df["type"] == "FALSE_POSITIVE").sum()
-            confirmed = df["type"].isin(["TERM_WADA", "GEOM_WADA", "MIESZANA", "POTWIERDZONA_AE"]).sum()
+            confirmed = df["type"].isin(["TERM_WADA", "GEOM_WADA", "MIESZANA", "BRAK_POTWIERDZENIA"]).sum()
+            not_confirmed_by_post_process = df["type"].isin(["BRAK_POTWIERDZENIA"]).sum()
+            
             self.logger.info(f"📊 Statystyki:")
             self.logger.info(f" - Wszystkie klatki: {total}")
             self.logger.info(f" - Potwierdzone anomalie: {confirmed}")
-            self.logger.info(f" - Fałszywe anomalie (FALSE_POSITIVE): {false_positives}")
+            self.logger.info(f" - Brak potwiedzenia anomalii: {not_confirmed_by_post_process}")
 
             # === WYKRES ===
             plt.figure(figsize=(14, 5))
@@ -160,14 +170,13 @@ class AnomalyDetector:
                 "TERM_WADA": "orange",
                 "GEOM_WADA": "blue",
                 "MIESZANA": "red",
-                "POTWIERDZONA_AE": "purple",
-                "FALSE_POSITIVE": "gray"
+                "BRAK_POTWIERDZENIA": "purple",
             }.items():
                 subset = df[df["type"] == anomaly_type]
                 if not subset.empty:
                     plt.scatter(subset.index, subset["recon_error"], label=anomaly_type, color=color)
 
-            plt.axhline(self.threshold, linestyle='--', color='gray', label="Próg AE")
+            plt.axhline(self.threshold, linestyle='--', color='red', label=f"Próg AE - {self.threshold}")
             plt.xlabel("Numer próbki")
             plt.ylabel("Błąd rekonstrukcji")
             plt.title("Błąd rekonstrukcji i typy anomalii")
@@ -185,10 +194,10 @@ if __name__ == "__main__":
     config = {
         'model_path': "models/weld_autoencoder_test.pth",
         'threshold_path': "models/weld_threshold.txt",
-        # 'image_dir': "frames_output/625_38n18_1_2mm_-161_07_41_19_806/preview_fixed",
-        'image_dir': "frames_output/600_56n17_1mm_-161_09_29_59_808/preview_fixed",
+        'image_dir': "frames_output/625_38n18_1_2mm_-161_07_41_19_806/preview_fixed",
+        # 'image_dir': "frames_output/600_56n17_1mm_-161_09_29_59_808/preview_fixed",
         'log_dir': "logs/anomalies",
-        'roi': (230, 0, 345, 420),
+        'roi': (230, 0, 345, 420), # weld roi
         'device': 'cuda' if torch.cuda.is_available() else 'cpu',
         'geom_thresh_contours': 3,
         'geom_thresh_area': 50,
