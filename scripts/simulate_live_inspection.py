@@ -1,87 +1,10 @@
-# import cv2
-# import numpy as np
-# import time
-# import os
-
-
-# seq_file_name = "625_38n18_1_2mm_-161_07_41_19_806"  # Nazwa sekwencji, którą chcesz przetworzyć
-# # === PARAMETRY ===
-# THRESHOLD = 0.347504
-# ROI = (230, 0, 345, 420)  # (x, y, width, height)
-# DELAY = 100  # ms between frames
-# SOURCE_TYPE = "video"  # "video" or "frames"
-# VIDEO_PATH = f"frames_ouput/{seq_file_name}.mp4"  # ścieżka do pliku wideo
-# FRAMES_DIR = f"frames_ouput/{seq_file_name}/preview_fixed"  # folder z klatkami (jpg/png)
-
-# def binarize(image, threshold):
-#     """Zamienia obraz na binarny (0/255) na podstawie RGB sumy i progu"""
-#     gray = np.sum(image, axis=2)  # suma RGB
-#     max_val = 255 * 3
-#     binary = (gray >= max_val * threshold).astype(np.uint8) * 255
-#     return binary
-
-# def process_frame(frame, roi, threshold):
-#     x, y, w, h = roi
-#     cropped = frame[y:y+h, x:x+w]
-#     binarized = binarize(cropped, threshold)
-#     return cropped, binarized
-
-# def run_simulation():
-#     if SOURCE_TYPE == "video":
-#         cap = cv2.VideoCapture(VIDEO_PATH)
-#         if not cap.isOpened():
-#             print("Nie można otworzyć pliku wideo.")
-#             return
-
-#         while True:
-#             ret, frame = cap.read()
-#             if not ret:
-#                 break
-
-#             roi_orig, roi_bin = process_frame(frame, ROI, THRESHOLD)
-
-#             # Pokaż obie wersje obok siebie
-#             combined = np.hstack([roi_orig, cv2.cvtColor(roi_bin, cv2.COLOR_GRAY2BGR)])
-#             cv2.imshow("Monitoring spoiny", combined)
-
-#             if cv2.waitKey(DELAY) & 0xFF == ord('q'):
-#                 break
-
-#         cap.release()
-#         cv2.destroyAllWindows()
-
-#     elif SOURCE_TYPE == "frames":
-#         frames = sorted([f for f in os.listdir(FRAMES_DIR) if f.lower().endswith(('.png', '.jpg', '.jpeg'))])
-
-#         for fname in frames:
-#             path = os.path.join(FRAMES_DIR, fname)
-#             frame = cv2.imread(path)
-#             if frame is None:
-#                 continue
-
-#             roi_orig, roi_bin = process_frame(frame, ROI, THRESHOLD)
-#             combined = np.hstack([roi_orig, cv2.cvtColor(roi_bin, cv2.COLOR_GRAY2BGR)])
-#             cv2.imshow("Monitoring spoiny", combined)
-
-#             if cv2.waitKey(DELAY) & 0xFF == ord('q'):
-#                 break
-
-#         cv2.destroyAllWindows()
-
-#     else:
-#         print("Nieznany typ źródła:", SOURCE_TYPE)
-
-# if __name__ == "__main__":
-#     run_simulation()
-
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import deque
 
 # === KONFIGURACJA ===
-video_path = 'twoja_sekwencja.mp4'  # <-- Podaj ścieżkę do pliku wideo
+video_path = 'twoja_sekwencja.mp4'  # ścieżka do pliku wideo
 mask_path = 'images/maska.png'
 
 # === PROGI klasyfikacji ===

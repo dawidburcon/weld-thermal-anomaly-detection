@@ -5,8 +5,10 @@ import os
 from glob import iglob
 import csv
 
+# TODO: Prepare proper paths input - maybe CLI or sth
 # seq_file_name = '625_38n18_1_2mm_-161_07_41_19_806'
-seq_file_name = '600_41n20_1_2mm_-161_08_03_50_784'
+# seq_file_name = '600_41n20_1_2mm_-161_08_03_50_784'
+seq_file_name = '600_41n20_1_2mm_-161_08_05_51_044'
 
 # Pobranie listy TIFF
 tiff_frames = sorted(list(iglob(f"./frames_output/{seq_file_name}/radiometric/*.tiff")))
@@ -31,10 +33,10 @@ with open(csv_output_path, "w", newline="") as csvfile:
 for frame in tiff_frames:
     print(f"\n📂 Przetwarzam: {frame}")
 
-    # Wczytaj TIFF
+    # --- Wczytaj TIFF ---
     thermal_image = imageio.imread(frame).astype(np.float32)
 
-    # Konwersja do temperatury w °C
+    # --- Konwersja do temperatury w °C ---
     thermal_image_celsius = (thermal_image / 10) - 273.15
 
     h, w = thermal_image_celsius.shape
@@ -67,7 +69,7 @@ for frame in tiff_frames:
     # --- Zapis podglądu ---
     output_path = os.path.join(preview_fixed_dir, os.path.basename(frame).replace(".tiff", ".jpg"))
     cv2.imwrite(output_path, colored)
-    print(f"   ✅ Zapisano: {output_path}")
+    print(f"   -- Zapisano: {output_path}")
 
     # --- Zapis do CSV ---
     with open(csv_output_path, "a", newline="") as csvfile:
@@ -79,4 +81,4 @@ for frame in tiff_frames:
             middle_avg_temp
         ])
 
-    print(f"   📊 Statystyki zapisane do: {csv_output_path}")
+    print(f"   -- Statystyki zapisane do: {csv_output_path}")

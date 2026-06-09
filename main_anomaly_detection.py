@@ -4,7 +4,7 @@ import torch
 import numpy as np
 from datetime import datetime
 from torchvision import transforms
-from weld_model import ConvAutoencoder
+from src.model import ConvAutoencoder
 from PIL import Image
 import logging
 import matplotlib.pyplot as plt
@@ -190,12 +190,11 @@ class AnomalyDetector:
             self.logger.info(f"📈 Zapisano wykres do: {plot_path}")
 
 
+# TODO: Prepare CLI input for paths and parameters instead of hardcoding in config dict
 if __name__ == "__main__":
     config = {
         'model_path': "models/weld_autoencoder_test.pth",
         'threshold_path': "models/weld_threshold.txt",
-        # 'image_dir': "frames_output/625_38n18_1_2mm_-161_07_41_19_806/preview_fixed",
-        # 'image_dir': "frames_output/600_56n17_1mm_-161_09_29_59_808/preview_fixed",
         'image_dir': "frames_output/600_46n7_1_2mm_-161_08_35_51_272/preview_fixed",
         'log_dir': "logs/anomalies",
         'roi': (230, 0, 345, 420), # weld roi
