@@ -12,6 +12,11 @@
 
 This project implements a two-stage anomaly detection pipeline for welding quality inspection using radiometric thermal imagery. Raw `.seq` recordings from a FLIR thermal camera are processed frame-by-frame to identify thermal and geometric irregularities in the weld pool.
 
+<p>
+  <img src="assets/stanowisko_spawalnicze.png" width="37.75%" />
+  <img src="assets/schema_stanowisko.png" width="50%" />
+</p>
+
 **Detection approaches:**
 
 | Method | Description |
@@ -171,13 +176,22 @@ Trained with MSE loss on *normal* weld frames. Frames whose reconstruction error
 
 ## Results
 
-> *To be filled in after full evaluation.*
+> *Examples from different sequences.*
 
-| Metric | Value |
-|--------|-------|
-| Detection threshold | — |
-| Confirmed anomalies / total frames | — |
-| False positive rate | — |
+Material and flir output (after splitting from .seq by flirpy)
+<p>
+  <img src="assets/example_material.png" width="48%" />
+  <img src="assets/flirpy_frame_preview_as_jpg.png" width="44%" />
+</p>
+
+Autoencoder reconstruction error with statistical methods fusion diagram
+![System diagram](assets/cae_anomaly_detection_diag.png)
+
+Statistical algorythms fusion
+![System diagram](assets/canny_subplot.png)
+
+Logs from final anomaly detection run
+![System diagram](assets/logs_system_integration.png)
 
 ---
 

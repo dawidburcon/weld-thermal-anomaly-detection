@@ -22,6 +22,7 @@ output_rois/
 *.fff
 # PNG nie ignorujemy globalnie – images/maska.png i inne zasoby powinny być śledzone
 # *.png
+*Zone.Identifier
 
 # --- Modele (wagi, progi) ---
 models/*.pth
