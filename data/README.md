@@ -1,5 +1,5 @@
 # Data
 
-Surowe pliki `.seq` z kamery termowizyjnej FLIR nie są dołączone do repozytorium ze względu na rozmiar.
+Raw `.seq` files from the FLIR thermal camera are not included in the repository due to their size.
 
-Dane dostępne na żądanie.
+Data available upon request.
