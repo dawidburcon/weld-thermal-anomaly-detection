@@ -1,14 +1,49 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
 .python-version
-.vscode
+.venv/
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# --- Dane surowe (duże pliki binarne) ---
+frames_output/
+seq_spoiny/
+output_rois/
+
+# Obrazy wygenerowane (klatki, wyniki)
 *.jpg
 *.tiff
 *.fff
-*.seq
-*.csv
-*.png
+# PNG nie ignorujemy globalnie – images/maska.png i inne zasoby powinny być śledzone
+# *.png
+*Zone.Identifier
+*.txt
 
-# Ignore all files in the data directory
-frames_output/*
-seq_spoiny/*
-*.pth
+# --- Modele (wagi, progi) ---
+models/*.pth
+models/*.txt
+models/ssim/
+# Ale .gitkeep zostaje
+!models/.gitkeep
+
+# --- Wyniki analiz ---
+results/
+logs/
+anomaly_results_on_test_data/
+anomaly_metrics_*.csv
+
+# --- Dane tymczasowe ---
+*.pkl
+*.log
+*.seq
+*.fff
+
+# requirements.txt śledzimy
+!requirements.txt
 
