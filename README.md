@@ -1,6 +1,7 @@
 # Weld Thermal Anomaly Detection
 
-> Automated detection of weld defects from FLIR thermal camera recordings using statistical methods and a Convolutional Autoencoder.
+> Automated detection of TIG weld defects from FLIR thermal camera recordings using statistical methods and an unsupervised Convolutional Autoencoder.
+
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.x-orange)
@@ -10,12 +11,15 @@
 
 ## Overview
 
-This project implements a two-stage anomaly detection pipeline for welding quality inspection using radiometric thermal imagery. Raw `.seq` recordings from a FLIR thermal camera are processed frame-by-frame to identify thermal and geometric irregularities in the weld pool.
+
+This project implements a two-stage anomaly detection pipeline for welding quality inspection using radiometric thermal imagery. Raw `.seq` recordings from a FLIR thermal camera are processed frame-by-frame to identify thermal and geometric irregularities in the TIG weld pool.
 
 <p>
   <img src="assets/stanowisko_spawalnicze.png" width="37.75%" />
   <img src="assets/schema_stanowisko.png" width="50%" />
+  <img src="assets/anomalies_horizontal_diagram.svg" width="88%">
 </p>
+![System diagram](assets/schemat_blokowy_system.png)
 
 **Detection approaches:**
 
@@ -37,11 +41,6 @@ This project implements a two-stage anomaly detection pipeline for welding quali
 
 ## Architecture
 
-The system architecture and CAE schema are available as editable diagrams in [`assets/`](assets/):
-
-- `anomalies_system_diagram.drawio` — end-to-end pipeline overview
-- `cae_schema.drawio` — Convolutional Autoencoder structure
-- `anomalies_horizontal_diagram.drawio` — anomaly classification flow
 
 ---
 
@@ -52,7 +51,7 @@ weld-thermal-anomaly-detection/
 ├── main_anomaly_detection.py       # Main OOP inference script
 │
 ├── notebooks/                      # Numbered pipeline notebooks
-│   ├── 01_extract_frames.ipynb     # .seq → radiometric TIFF + preview JPEG
+│   ├── 01_extract_frames.ipynb     # .seq → radiometric TIFF + preview JPEG via flirpy Splitter method
 │   ├── 02_temperature_analysis.ipynb
 │   ├── 03_train_autoencoder.ipynb
 │   ├── 04_detect_anomalies.ipynb
@@ -159,6 +158,8 @@ python scripts/simulate_live_inspection.py
 
 ## Model — ConvAutoencoder
 
+The CAE is trained in an unsupervised manner — only reference (non-anomalous) frames are used during training. Anomalies manifest as elevated reconstruction error at inference time.
+
 ```
 Input (1×64×64)
   → Conv2d(1→8,  3×3, stride=2) + ReLU
@@ -178,6 +179,16 @@ Trained with MSE loss on *normal* weld frames. Frames whose reconstruction error
 
 > *Examples from different sequences.*
 
+Evaluated on **15 TIG welding sequences** with the following parameter ranges:
+
+| Parameter | Range |
+|-----------|-------|
+| Current | 50–80 A |
+| Travel speed | 3–7 mm/s |
+| Material | Inconel 600, Inconel 625 |
+
+The system correctly identified weld discontinuities and thermal irregularities across all test sequences.
+
 Material and flir output (after splitting from .seq by flirpy)
 <p>
   <img src="assets/example_material.png" width="48%" />
@@ -192,6 +203,8 @@ Statistical algorythms fusion
 
 Logs from final anomaly detection run
 ![System diagram](assets/logs_system_integration.png)
+
+
 
 ---
 
