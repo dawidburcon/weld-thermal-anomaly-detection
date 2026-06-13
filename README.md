@@ -1,6 +1,6 @@
 # Weld Thermal Anomaly Detection
 
-> Automated detection of TIG weld defects from FLIR thermal camera recordings using statistical methods and an unsupervised Convolutional Autoencoder.
+> Automated detection of TIG weld defects from FLIR thermal camera recordings using an unsupervised Convolutional Autoencoder and supporting statistical methods.
 
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
@@ -19,7 +19,6 @@ This project implements a two-stage anomaly detection pipeline for welding quali
   <img src="assets/schema_stanowisko.png" width="50%" />
   <img src="assets/anomalies_horizontal_diagram.svg" width="88%">
 </p>
-![System diagram](assets/schemat_blokowy_system.png)
 
 **Detection approaches:**
 
@@ -36,11 +35,6 @@ This project implements a two-stage anomaly detection pipeline for welding quali
 | `TERM_WADA` | Thermal defect (hot/cold spot) |
 | `GEOM_WADA` | Geometric irregularity (edge artefact) |
 | `MIESZANA` | Both thermal and geometric anomaly |
-
----
-
-## Architecture
-
 
 ---
 
@@ -84,6 +78,14 @@ weld-thermal-anomaly-detection/
 git clone https://github.com/<your-username>/weld-thermal-anomaly-detection.git
 cd weld-thermal-anomaly-detection
 
+uv sync
+
+# PyTorch with CUDA 12.4 is resolved automatically from the PyTorch index.
+```
+
+with pip (alternative)
+
+```bash
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 
