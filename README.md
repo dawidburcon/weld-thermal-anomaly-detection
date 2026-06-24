@@ -1,6 +1,6 @@
-# Weld Thermal Anomaly Detection
+# AI-Powered Weld Thermal Anomaly Detection
 
-> Automated detection of TIG weld defects from FLIR thermal camera recordings using an unsupervised Convolutional Autoencoder and supporting statistical methods.
+> AI-powered detection of TIG weld defects with thermography sequences from FLIR thermal camera recordings using an unsupervised Convolutional Autoencoder and supporting statistical methods.
 
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
